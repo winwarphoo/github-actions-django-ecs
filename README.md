@@ -1,7 +1,7 @@
 # GitHub Actions CI/CD
 
 ## AWS CloudFormation
-- テンプレート
+- テンプレート検証
   ```
   aws cloudformation validate-template --template-body file://./cloudformation/network.yml
   ```
@@ -14,4 +14,17 @@
 - スタック削除
   ```
   aws cloudformation delete-stack --stack-name phoo-stack
+  ```
+
+## Dockerfile
+- Dockerイメージビルド
+  ```
+  cd github-actions-django-ecs
+  docker build -t djangoimage .
+  docker images
+  ```
+
+- Dockerコンテナ起動
+  ```
+  docker run --rm -p 8080:8080 djangoimage
   ```
