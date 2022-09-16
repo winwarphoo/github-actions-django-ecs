@@ -17,6 +17,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: create dotenvfile
+      run: |
+        echo "SECRET_KEY=${secrets.DJANGO_SECRET_KEY}" > ./MyDjangoProject/.env
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
@@ -27,7 +30,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        python MyDjangoProject/manage.py test
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
